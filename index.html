@@ -1,1150 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="Nova is a modern marketing platform that helps ambitious businesses grow faster."
-  />
-  <title>Nova — Grow Your Business Faster</title>
-
-  <style>
-    :root {
-      --bg: #080b14;
-      --bg-light: #101522;
-      --card: #111827;
-      --text: #f8fafc;
-      --muted: #9ca3af;
-      --primary: #7c3aed;
-      --primary-light: #a78bfa;
-      --border: rgba(255, 255, 255, 0.1);
-      --max-width: 1180px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Inter, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(92%, var(--max-width));
-      margin: auto;
-    }
-
-    /* NAVIGATION */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(8, 11, 20, 0.8);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .logo span {
-      color: var(--primary-light);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: #d1d5db;
-      font-size: 0.95rem;
-      transition: 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: white;
-    }
-
-    .nav-button {
-      padding: 10px 18px;
-      border-radius: 8px;
-      background: var(--primary);
-      color: white !important;
-    }
-
-    .menu {
-      display: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      padding: 140px 0 90px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: var(--primary);
-      opacity: 0.15;
-      filter: blur(120px);
-      border-radius: 50%;
-      top: 5%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .hero-content {
-      position: relative;
-      max-width: 850px;
-      margin: auto;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 7px 14px;
-      border: 1px solid rgba(167, 139, 250, 0.3);
-      background: rgba(124, 58, 237, 0.1);
-      color: var(--primary-light);
-      border-radius: 50px;
-      font-size: 0.85rem;
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      font-size: clamp(3rem, 7vw, 5.8rem);
-      line-height: 1.02;
-      letter-spacing: -4px;
-      margin-bottom: 25px;
-    }
-
-    .gradient {
-      background: linear-gradient(90deg, #a78bfa, #c084fc, #f0abfc);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      color: var(--muted);
-      font-size: 1.15rem;
-    }
-
-    .hero-buttons {
-      margin-top: 35px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 24px;
-      border-radius: 9px;
-      font-weight: 600;
-      transition: 0.25s;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-    }
-
-    .btn-primary:hover {
-      background: #6d28d9;
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    /* TRUST */
-    .trust {
-      padding: 45px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .trust p {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 25px;
-      font-size: 0.9rem;
-    }
-
-    .logos {
-      display: flex;
-      justify-content: space-around;
-      gap: 30px;
-      flex-wrap: wrap;
-      color: #6b7280;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 110px 0;
-    }
-
-    .section-heading {
-      max-width: 700px;
-      margin-bottom: 55px;
-    }
-
-    .section-heading.center {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-
-    .eyebrow {
-      color: var(--primary-light);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-size: clamp(2.2rem, 5vw, 3.7rem);
-      line-height: 1.1;
-      letter-spacing: -2px;
-      margin-bottom: 18px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    /* FEATURES */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .feature-card {
-      padding: 32px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      transition: 0.25s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(167, 139, 250, 0.35);
-    }
-
-    .icon {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: rgba(124, 58, 237, 0.15);
-      color: var(--primary-light);
-      font-size: 1.4rem;
-      margin-bottom: 22px;
-    }
-
-    .feature-card h3 {
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
-
-    .feature-card p {
-      color: var(--muted);
-    }
-
-    /* ABOUT */
-    .about {
-      background: var(--bg-light);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
-    }
-
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-
-    .check-list {
-      list-style: none;
-    }
-
-    .check-list li {
-      margin: 13px 0;
-      color: #d1d5db;
-    }
-
-    .check-list li::before {
-      content: "✓";
-      color: var(--primary-light);
-      font-weight: bold;
-      margin-right: 10px;
-    }
-
-    .dashboard {
-      background: #0b1020;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-    }
-
-    .dashboard-top {
-      display: flex;
-      justify-content: space-between;
-      color: var(--muted);
-      margin-bottom: 25px;
-    }
-
-    .chart {
-      height: 260px;
-      display: flex;
-      align-items: end;
-      gap: 10px;
-      padding-top: 20px;
-    }
-
-    .bar {
-      flex: 1;
-      background: linear-gradient(to top, var(--primary), var(--primary-light));
-      border-radius: 5px 5px 0 0;
-      min-height: 20px;
-    }
-
-    /* STATS */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      text-align: center;
-    }
-
-    .stat {
-      padding: 25px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 2.5rem;
-      margin-bottom: 5px;
-    }
-
-    .stat span {
-      color: var(--muted);
-    }
-
-    /* TESTIMONIALS */
-    .testimonials {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .testimonial {
-      padding: 30px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      border-radius: 16px;
-    }
-
-    .stars {
-      color: #fbbf24;
-      margin-bottom: 18px;
-    }
-
-    .testimonial p {
-      color: #d1d5db;
-      margin-bottom: 22px;
-    }
-
-    .person {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #7c3aed, #ec4899);
-      display: grid;
-      place-items: center;
-      font-weight: bold;
-    }
-
-    .person small {
-      color: var(--muted);
-      display: block;
-    }
-
-    /* PRICING */
-    .pricing {
-      background: var(--bg-light);
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .price-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 35px;
-      position: relative;
-    }
-
-    .price-card.featured {
-      border-color: var(--primary);
-      box-shadow: 0 0 50px rgba(124, 58, 237, 0.15);
-    }
-
-    .popular {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: var(--primary);
-      font-size: 0.72rem;
-      padding: 5px 10px;
-      border-radius: 30px;
-    }
-
-    .price {
-      font-size: 3rem;
-      font-weight: 800;
-      margin: 15px 0;
-    }
-
-    .price span {
-      font-size: 0.9rem;
-      color: var(--muted);
-      font-weight: normal;
-    }
-
-    .price-card p {
-      color: var(--muted);
-      margin-bottom: 25px;
-    }
-
-    .price-features {
-      list-style: none;
-      margin-bottom: 30px;
-    }
-
-    .price-features li {
-      margin: 12px 0;
-      color: #d1d5db;
-    }
-
-    .price-features li::before {
-      content: "✓";
-      color: var(--primary-light);
-      margin-right: 10px;
-    }
-
-    .price-card .btn {
-      width: 100%;
-      text-align: center;
-    }
-
-    /* FAQ */
-    .faq {
-      max-width: 800px;
-      margin: auto;
-    }
-
-    details {
-      border-bottom: 1px solid var(--border);
-      padding: 22px 0;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 1.05rem;
-    }
-
-    details p {
-      color: var(--muted);
-      padding-top: 15px;
-    }
-
-    /* CTA */
-    .cta {
-      padding: 100px 0;
-    }
-
-    .cta-box {
-      text-align: center;
-      padding: 80px 30px;
-      border-radius: 24px;
-      background:
-        radial-gradient(circle at center, rgba(124, 58, 237, 0.25), transparent 55%),
-        var(--card);
-      border: 1px solid var(--border);
-    }
-
-    .cta-box p {
-      max-width: 600px;
-      margin: 0 auto 30px;
-      color: var(--muted);
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 60px 0 30px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr repeat(3, 1fr);
-      gap: 40px;
-      margin-bottom: 50px;
-    }
-
-    .footer-brand p {
-      color: var(--muted);
-      max-width: 300px;
-      margin-top: 15px;
-    }
-
-    footer h4 {
-      margin-bottom: 15px;
-    }
-
-    footer ul {
-      list-style: none;
-    }
-
-    footer li {
-      margin: 9px 0;
-      color: var(--muted);
-    }
-
-    footer a:hover {
-      color: white;
-    }
-
-    .copyright {
-      padding-top: 25px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.85rem;
-      text-align: center;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 850px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        width: 100%;
-        background: var(--bg);
-        flex-direction: column;
-        padding: 25px;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu {
-        display: block;
-      }
-
-      .features,
-      .testimonials,
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-    }
-
-    @media (max-width: 500px) {
-      section {
-        padding: 75px 0;
-      }
-
-      .stats,
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 120px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICESUPER Demo</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#0f1020;
+  color:white;
+}
+
+.container{
+  display:flex;
+  min-height:100vh;
+}
+
+.demo{
+  width:70%;
+  background:#111;
+}
+
+iframe{
+  width:100%;
+  height:100vh;
+  border:none;
+}
+
+.right{
+  width:30%;
+  padding:30px 22px;
+  background:linear-gradient(180deg,#181a35,#0b0c18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.box{
+  width:100%;
+  background:rgba(10,10,10,.92);
+  border:1px solid #d4af37;
+  border-radius:22px;
+  padding:26px 20px;
+  text-align:center;
+  box-shadow:0 0 35px rgba(212,175,55,.35);
+}
+
+.badge{
+  display:inline-block;
+  background:#d4af37;
+  color:#111;
+  padding:8px 18px;
+  border-radius:30px;
+  font-weight:800;
+  margin-bottom:16px;
+}
+
+h1{
+  font-size:32px;
+  color:#ffd86b;
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+
+.sub{
+  font-size:17px;
+  line-height:1.5;
+  margin-bottom:22px;
+  color:#eee;
+}
+
+.features{
+  display:grid;
+  gap:12px;
+  margin:22px 0;
+}
+
+.feature{
+  background:linear-gradient(90deg,#1b1b1b,#2b2208);
+  border:1px solid rgba(212,175,55,.6);
+  padding:14px;
+  border-radius:14px;
+  font-size:17px;
+  font-weight:700;
+}
+
+.feature span{
+  color:#ffd86b;
+}
+
+.website-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:16px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.website-row a{
+  text-decoration:none;
+}
+
+.website{
+  color:#25D366;
+}
+
+.whatsapp-small{
+  color:#ffd86b;
+}
+
+.cta{
+  display:block;
+  background:#25D366;
+  color:#fff;
+  text-decoration:none;
+  padding:17px;
+  border-radius:16px;
+  font-size:20px;
+  font-weight:900;
+  margin-top:22px;
+  box-shadow:0 8px 18px rgba(37,211,102,.35);
+  transition:.3s;
+}
+
+.cta:hover{
+  transform:scale(1.03);
+  background:#1ebe5d;
+}
+
+.trust{
+  margin-top:16px;
+  color:#ccc;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.footer{
+  margin-top:18px;
+  font-size:12px;
+  color:#aaa;
+  line-height:1.5;
+}
+
+@media(max-width:768px){
+  .container{
+    flex-direction:column;
+  }
+
+  .demo,
+  .right{
+    width:100%;
+  }
+
+  iframe{
+    height:500px;
+  }
+
+  .right{
+    padding:20px;
+  }
+}
+
+@media(max-width:480px){
+  h1{
+    font-size:26px;
+  }
+
+  .sub{
+    font-size:16px;
+  }
+
+  .feature{
+    font-size:16px;
+    padding:12px;
+  }
+
+  .cta{
+    font-size:18px;
+    padding:15px;
+  }
+
+  .website-row{
+    flex-direction:column;
+    gap:8px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <div class="container nav-inner">
-      <a href="#" class="logo">No<span>va</span></a>
+<div class="container">
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#about">Why Nova</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact" class="nav-button">Get Started</a></li>
-      </ul>
+  <div class="demo">
+    <iframe src="https://icesuper.info/"></iframe>
+  </div>
 
-      <div class="menu" id="menu">☰</div>
-    </div>
-  </nav>
+  <div class="right">
+    <div class="box">
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container hero-content">
-      <span class="badge">✨ The smarter way to grow</span>
+      <div class="badge">ICESUPER OFFICIAL</div>
 
-      <h1>
-        Turn attention into
-        <span class="gradient">real growth.</span>
-      </h1>
+      <h1>ICESUPER WHITELABEL &amp; MASTER AVAILABLE</h1>
 
-      <p>
-        Nova gives modern businesses the tools, insights, and strategy they
-        need to attract customers, increase conversions, and scale faster.
+      <p class="sub">
+        Get your Icesuper Whitelabel and Master Panel
+        in the cheapest rate.
       </p>
 
-      <div class="hero-buttons">
-        <a href="#contact" class="btn btn-primary">Start Growing →</a>
-        <a href="#features" class="btn btn-secondary">Explore Features</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- TRUST -->
-  <section class="trust">
-    <div class="container">
-      <p>Trusted by ambitious teams worldwide</p>
-
-      <div class="logos">
-        <span>ACME</span>
-        <span>Vertex</span>
-        <span>Orbit</span>
-        <span>Pulse</span>
-        <span>Northstar</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section id="features">
-    <div class="container">
-      <div class="section-heading center">
-        <div class="eyebrow">Everything you need</div>
-        <h2>Marketing that works harder.</h2>
-        <p>
-          Replace scattered tools and guesswork with one powerful growth
-          platform built around measurable results.
-        </p>
-      </div>
-
       <div class="features">
-
-        <div class="feature-card">
-          <div class="icon">⚡</div>
-          <h3>Launch Faster</h3>
-          <p>
-            Create campaigns, landing pages, and customer journeys in a
-            fraction of the time.
-          </p>
+        <div class="feature">
+          Whitelabel: <span>Available Now</span>
         </div>
 
-        <div class="feature-card">
-          <div class="icon">📊</div>
-          <h3>Track Everything</h3>
-          <p>
-            See exactly what's working with simple, actionable analytics and
-            real-time performance data.
-          </p>
+        <div class="feature">
+          Master Panel: <span>Available Now</span>
         </div>
 
-        <div class="feature-card">
-          <div class="icon">🎯</div>
-          <h3>Reach the Right People</h3>
-          <p>
-            Build smarter audiences and deliver personalized experiences
-            that turn prospects into customers.
-          </p>
+        <div class="feature">
+          Cheapest Rate: <span>Best Price</span>
         </div>
 
-        <div class="feature-card">
-          <div class="icon">🤖</div>
-          <h3>Automate Growth</h3>
-          <p>
-            Automate repetitive marketing tasks so your team can focus on
-            strategy, creativity, and customers.
-          </p>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon">🔗</div>
-          <h3>Connect Your Stack</h3>
-          <p>
-            Integrate the tools you already use and keep your entire workflow
-            connected.
-          </p>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon">💡</div>
-          <h3>Get Better Insights</h3>
-          <p>
-            Turn customer data into clear recommendations that help you make
-            better marketing decisions.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="about">
-    <div class="container about-grid">
-
-      <div class="about-text">
-        <div class="eyebrow">Built for growth</div>
-
-        <h2>Stop guessing. Start knowing.</h2>
-
-        <p>
-          Great marketing isn't about doing more. It's about knowing what
-          matters and investing your time and budget where it creates the
-          biggest impact.
-        </p>
-
-        <ul class="check-list">
-          <li>Simple dashboards built for decision makers</li>
-          <li>Real-time campaign performance</li>
-          <li>Conversion-focused customer journeys</li>
-          <li>Actionable growth recommendations</li>
-        </ul>
-      </div>
-
-      <div class="dashboard">
-        <div class="dashboard-top">
-          <span>Campaign Performance</span>
-          <span>Last 30 days</span>
-        </div>
-
-        <div class="chart">
-          <div class="bar" style="height:35%"></div>
-          <div class="bar" style="height:45%"></div>
-          <div class="bar" style="height:40%"></div>
-          <div class="bar" style="height:60%"></div>
-          <div class="bar" style="height:55%"></div>
-          <div class="bar" style="height:72%"></div>
-          <div class="bar" style="height:68%"></div>
-          <div class="bar" style="height:82%"></div>
-          <div class="bar" style="height:78%"></div>
-          <div class="bar" style="height:94%"></div>
+        <div class="feature">
+          Website: <span>icesuper.info</span>
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <section>
-    <div class="container">
-      <div class="stats">
-        <div class="stat">
-          <strong>10k+</strong>
-          <span>Businesses growing</span>
-        </div>
-
-        <div class="stat">
-          <strong>42%</strong>
-          <span>Average conversion lift</span>
-        </div>
-
-        <div class="stat">
-          <strong>3.2x</strong>
-          <span>Average ROI</span>
-        </div>
-
-        <div class="stat">
-          <strong>99.9%</strong>
-          <span>Platform uptime</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section>
-    <div class="container">
-      <div class="section-heading center">
-        <div class="eyebrow">Customer stories</div>
-        <h2>Loved by growing teams.</h2>
-        <p>
-          See why businesses choose Nova to turn their marketing into a
-          predictable growth engine.
-        </p>
-      </div>
-
-      <div class="testimonials">
-
-        <div class="testimonial">
-          <div class="stars">★★★★★</div>
-          <p>
-            "Nova helped us completely rethink our marketing workflow. We
-            launched faster and finally had a clear picture of what was
-            driving revenue."
-          </p>
-
-          <div class="person">
-            <div class="avatar">JS</div>
-            <div>
-              <strong>Jordan Smith</strong>
-              <small>Founder, Vertex</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial">
-          <div class="stars">★★★★★</div>
-          <p>
-            "The biggest difference is clarity. Everyone on our team can see
-            what's working and what we should focus on next."
-          </p>
-
-          <div class="person">
-            <div class="avatar">AM</div>
-            <div>
-              <strong>Alex Morgan</strong>
-              <small>CMO, Orbit</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial">
-          <div class="stars">★★★★★</div>
-          <p>
-            "We reduced wasted ad spend and increased qualified leads within
-            the first few months. Nova quickly became essential to our team."
-          </p>
-
-          <div class="person">
-            <div class="avatar">RK</div>
-            <div>
-              <strong>Ryan Kim</strong>
-              <small>Growth Lead, Pulse</small>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="pricing">
-    <div class="container">
-
-      <div class="section-heading center">
-        <div class="eyebrow">Simple pricing</div>
-        <h2>Choose your growth plan.</h2>
-        <p>
-          Start small and upgrade when your business is ready.
-        </p>
-      </div>
-
-      <div class="pricing-grid">
-
-        <div class="price-card">
-          <h3>Starter</h3>
-
-          <div class="price">
-            $19 <span>/month</span>
-          </div>
-
-          <p>For individuals and small teams getting started.</p>
-
-          <ul class="price-features">
-            <li>5 campaigns</li>
-            <li>Basic analytics</li>
-            <li>1,000 contacts</li>
-            <li>Email support</li>
-          </ul>
-
-          <a href="#contact" class="btn btn-secondary">Get Started</a>
-        </div>
-
-        <div class="price-card featured">
-          <span class="popular">POPULAR</span>
-
-          <h3>Growth</h3>
-
-          <div class="price">
-            $49 <span>/month</span>
-          </div>
-
-          <p>For growing businesses that want more power.</p>
-
-          <ul class="price-features">
-            <li>Unlimited campaigns</li>
-            <li>Advanced analytics</li>
-            <li>25,000 contacts</li>
-            <li>Automation</li>
-            <li>Priority support</li>
-          </ul>
-
-          <a href="#contact" class="btn btn-primary">Start Free Trial</a>
-        </div>
-
-        <div class="price-card">
-          <h3>Scale</h3>
-
-          <div class="price">
-            $99 <span>/month</span>
-          </div>
-
-          <p>For established teams scaling aggressively.</p>
-
-          <ul class="price-features">
-            <li>Everything in Growth</li>
-            <li>Unlimited contacts</li>
-            <li>Advanced automation</li>
-            <li>Custom reporting</li>
-            <li>Dedicated support</li>
-          </ul>
-
-          <a href="#contact" class="btn btn-secondary">Contact Sales</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="container">
-      <div class="section-heading center">
-        <div class="eyebrow">FAQ</div>
-        <h2>Questions? We've got answers.</h2>
-      </div>
-
-      <div class="faq">
-
-        <details>
-          <summary>Can I try Nova before paying?</summary>
-          <p>
-            Yes. The Growth plan includes a free trial so you can explore the
-            platform before committing.
-          </p>
-        </details>
-
-        <details>
-          <summary>Do I need technical knowledge?</summary>
-          <p>
-            No. Nova is designed for marketing teams and business owners, so
-            you can get started without coding experience.
-          </p>
-        </details>
-
-        <details>
-          <summary>Can I cancel at any time?</summary>
-          <p>
-            Yes. There are no long-term contracts. You can change or cancel
-            your plan whenever you need.
-          </p>
-        </details>
-
-        <details>
-          <summary>Does Nova integrate with other tools?</summary>
-          <p>
-            Yes. Nova is designed to connect with the tools and services your
-            team already uses.
-          </p>
-        </details>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="contact" class="cta">
-    <div class="container">
-      <div class="cta-box">
-
-        <div class="eyebrow">Ready to grow?</div>
-
-        <h2>Build your next growth story.</h2>
-
-        <p>
-          Join thousands of ambitious businesses using Nova to turn their
-          marketing into measurable results.
-        </p>
-
-        <a href="mailto:hello@example.com" class="btn btn-primary">
-          Get Started for Free →
+      <div class="website-row">
+        <a class="website" href="https://icesuper.info/" target="_blank">
+          🌐 icesuper.info
         </a>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-
-      <div class="footer-grid">
-
-        <div class="footer-brand">
-          <div class="logo">No<span>va</span></div>
-
-          <p>
-            A modern growth platform for ambitious businesses.
-          </p>
-        </div>
-
-        <div>
-          <h4>Product</h4>
-          <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#">Integrations</a></li>
-            <li><a href="#">Updates</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Security</a></li>
-          </ul>
-        </div>
-
+        <a class="whatsapp-small" href="https://wa.me/+447767775396" target="_blank">
+          💬 WhatsApp
+        </a>
       </div>
 
-      <div class="copyright">
-        © 2026 Nova. All rights reserved.
+      <a class="cta"
+         href="https://wa.me/+447767775396?text=Hello%20I%20want%20Icesuper%20Whitelabel%20or%20Master"
+         target="_blank">
+        📲 WhatsApp Now
+      </a>
+
+      <p class="trust">
+        ✅ Check our website on left side<br>
+        ✅ Direct WhatsApp support<br>
+        ✅ Cheapest rate available<br>
+        📞 +447767775396
+      </p>
+
+      <div class="footer">
+        Icesuper Whitelabel &amp; Master Available | Contact on WhatsApp
       </div>
 
     </div>
-  </footer>
+  </div>
 
-  <!-- MOBILE MENU -->
-  <script>
-    const menu = document.getElementById("menu");
-    const navLinks = document.getElementById("navLinks");
-
-    menu.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
-    });
-
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("active");
-      });
-    });
-  </script>
+</div>
 
 </body>
 </html>
+```
